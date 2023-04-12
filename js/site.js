@@ -127,8 +127,8 @@ function sumAll() {
 
     for (i = 0; i < numberArray.length; i++)
     {
-      numberArray[i] = parseInt(numberArray[i]);
-      numberSum += numberArray[i];
+      let currentNumber = parseInt(numberArray[i]);
+      numberSum += currentNumber;
     }
 
     results = document.getElementById('results');
