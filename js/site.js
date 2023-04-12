@@ -238,3 +238,16 @@ function average() {
     results.innerText = (numberSum/numberArray.length);
   }
 }
+
+function numberInput()
+{
+  let input = document.getElementById('numberSeries');
+  if (input.value == '')
+  {
+    input.value = 7
+  }
+  else
+  {
+    input.value += 7;
+  }
+}
