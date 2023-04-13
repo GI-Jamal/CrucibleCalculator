@@ -1,3 +1,7 @@
+var isCleared = true;
+var previousElement = "clear";
+var previousNumber = 0;
+
 function add(num1, num2) {
   let value1 = document.getElementById("firstNumber").value;
   let value2 = document.getElementById("secondNumber").value;
@@ -14,11 +18,22 @@ function add(num1, num2) {
       backdrop: "false",
     });
   } else {
+    
     let number3 = number1 + number2;
 
     let results = document.getElementById("results");
 
     results.innerText = number3;
+
+
+    if (Number.isInteger(number1))
+    {
+      alert("Number 1 was an int")
+    }
+    else
+    {
+      alert("Number 1 was a float")
+    }
   }
 }
 
@@ -238,49 +253,32 @@ function average() {
   }
 }
 
-
-function numberInput()
-{
+function numberInput() {
   let input = document.activeElement;
   let results = document.getElementById("resultsArea");
+  let operator = document.getElementById('operatorArea')
 
-  if (results.innerText == '0')
-  {
-    results.innerText = input.innerText
-  }
-
-  else
-  {
-    results.innerText += input.innerText
-  }
-}
-
-function numberInputTest() {
-  let input = document.activeElement;
-  let results = document.getElementById("resultsArea");
-  let operator = document.getElementById('operatorArea');
-  let previousInput = '0';
-
-
-  if (results.innerText == '0' && operator.innerText == '')
+  if (isCleared == true && previousElement != 'number') 
   {
     results.innerText = input.innerText;
-  }
-
+    operator.innerText = '';
+  } 
+  
   else
   {
-    if (result.innerText !='0' && operator.innerText != '')
-    {
-      previousInput = results.innerText;
-      clearScreen();
-      results.innerText = input.innerText;
-    }
-
-    else if (results.innerText != '0' && operator.innerText == '')
+    if (previousElement == "number" && results.innerText != "0") 
     {
       results.innerText += input.innerText;
+    } 
+
+    else 
+    {
+      results.innerText = input.innerText;
     }
+    
   }
+
+  previousElement = "number";
 }
 
 function calcSumAll() {
@@ -306,8 +304,9 @@ function calcSumAll() {
     }
 
     let operator = document.getElementById("operatorArea");
-    operator.innerText = '+';
-    
+    clearAll();
+    operator.innerText = "SUM";
+    previousElement = 'allOperator'
     results = document.getElementById("resultsArea");
     results.innerText = numberSum;
   }
@@ -336,8 +335,10 @@ function calcMultiplyAll() {
     }
 
     let operator = document.getElementById("operatorArea");
-    operator.innerText = "x";
-
+    
+    clearAll();
+    operator.innerText = "PROD";
+    previousElement = 'allOperator';
     results = document.getElementById("resultsArea");
     results.innerText = numberProduct;
   }
@@ -367,12 +368,14 @@ function calcMinimum() {
       }
     }
 
+    clearAll();
+    previousElement = "allOperator";
     results = document.getElementById("resultsArea");
     results.innerText = minimum;
   }
 
-    let operator = document.getElementById("operatorArea");
-    operator.innerText = "MIN";
+  let operator = document.getElementById("operatorArea");
+  operator.innerText = "MIN";
 }
 
 function calcMaximum() {
@@ -399,12 +402,15 @@ function calcMaximum() {
       }
     }
 
+    clearAll();
+    previousElement = "allOperator";
     results = document.getElementById("resultsArea");
     results.innerText = maximum;
   }
 
-    let operator = document.getElementById("operatorArea");
-    operator.innerText = "MAX";
+  
+  let operator = document.getElementById("operatorArea");
+  operator.innerText = "MAX";
 }
 
 function calcAverage() {
@@ -429,31 +435,126 @@ function calcAverage() {
       numberSum += currentNumber;
     }
 
+    clearAll();
+    previousElement = "allOperator";
     results = document.getElementById("resultsArea");
     results.innerText = numberSum / numberArray.length;
   }
 
-    let operator = document.getElementById("operatorArea");
-    operator.innerText = "AVG";
+  
+  let operator = document.getElementById("operatorArea");
+  operator.innerText = "AVG";
 }
 
-function clearScreen() {
+function clearAll() {
   let results = document.getElementById("resultsArea");
   let operator = document.getElementById("operatorArea");
   results.innerText = "0";
-  operator.innerText = '';
+  operator.innerText = "";
+  isCleared = true;
+  previousNumber = 0;
 }
 
-function calcAdd(previousNumber) {
-  
-  let results = document.getElementById('resultsArea');
-  let operator = document.getElementById('operatorArea');
-  operator.innerText = '+';
+function calcAdd() {
+  let results = document.getElementById("resultsArea");
+  let operator = document.getElementById("operatorArea");
+  let currentNumber = parseFloat(results.innerText);
+  let value3;
 
-  let value1 = parseInt(previousNumber);
-  let value2 = parseInt(results.innerText);
+  if (isNaN(currentNumber)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } 
+  else 
+  {
+    if (isCleared == true) 
+    {
+      previousNumber = currentNumber;
+      operator.innerText = "+";
+    } 
+    
+    else 
+    {
+      operator.innerText = '+';
+      value3 = previousNumber + currentNumber;
+      previousNumber = currentNumber;
+      results.innerText = value3;
+    }
+    previousElement = "operator";
+    isCleared = false;
+  }
+}
 
-  if (isNaN(value1) || isNaN(value2)) {
+function calcSubtract() {
+  let results = document.getElementById("resultsArea");
+  let operator = document.getElementById("operatorArea");
+  let currentNumber = parseFloat(results.innerText);
+  let value3;
+
+  if (isNaN(currentNumber)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } else {
+    if (isCleared == true) {
+      previousNumber = currentNumber;
+      operator.innerText = "-";
+    } else {
+      operator.innerText = "-";
+      value3 = previousNumber - currentNumber;
+      previousNumber = currentNumber;
+      results.innerText = value3;
+    }
+    previousElement = "operator";
+    isCleared = false;
+  }
+}
+
+function calcMultiply() {
+  let results = document.getElementById("resultsArea");
+  let operator = document.getElementById("operatorArea");
+  let currentNumber = parseFloat(results.innerText);
+  let value3;
+
+  if (isNaN(currentNumber)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } else {
+    if (isCleared == true) {
+      previousNumber = currentNumber;
+      operator.innerText = "x";
+    } else {
+      operator.innerText = "x";
+      value3 = previousNumber * currentNumber;
+      previousNumber = currentNumber;
+      results.innerText = value3;
+    }
+    previousElement = "operator";
+    isCleared = false;
+  }
+}
+
+function calcEquals() {
+  let results = document.getElementById("resultsArea");
+  let operator = document.getElementById("operatorArea");
+  let currentNumber = parseFloat(results.innerText);
+  let value3;
+
+  if (isNaN(currentNumber)) {
     Swal.fire({
       icon: "error",
       heightAuto: false,
@@ -463,10 +564,59 @@ function calcAdd(previousNumber) {
     });
   } 
   
-  
   else {
-    let value3 = value1 + value2;
+    if (isCleared == false && operator.innerText != '') 
+    {
+      if (operator.innerText == '+')
+      {
+        value3 = previousNumber + currentNumber;
+      }
 
-    results.innerText = value3;
+      else if (operator.innerText == '-')
+      {
+        value3 = previousNumber - currentNumber;
+      }
+
+      else if (operator.innerText == 'x')
+      {
+        value3 = previousNumber * currentNumber;
+      }
+
+      else if (operator.innerText == '÷')
+      {
+        value3 = previousNumber / currentNumber;
+      }
+      clearAll()
+      results.innerText = value3;
+    } 
+  }
+}
+
+function calcDivide() {
+  let results = document.getElementById("resultsArea");
+  let operator = document.getElementById("operatorArea");
+  let currentNumber = parseFloat(results.innerText);
+  let value3;
+
+  if (isNaN(currentNumber)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } else {
+    if (isCleared == true) {
+      previousNumber = currentNumber;
+      operator.innerText = "÷";
+    } else {
+      operator.innerText = "÷";
+      value3 = previousNumber / currentNumber;
+      previousNumber = currentNumber;
+      results.innerText = value3;
+    }
+    previousElement = "operator";
+    isCleared = false;
   }
 }

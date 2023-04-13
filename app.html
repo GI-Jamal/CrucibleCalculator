@@ -182,19 +182,19 @@
         <div class="col-8 pb-2">
           <div class="row row-cols-5 pt-2 g-2">
             <div class="col">
-              <button class="btn btn-primary w-100">+</button>
+              <button class="btn btn-primary w-100" onclick="calcAdd()">+</button>
             </div>
             <div class="col">
-              <button class="btn btn-primary w-100">-</button>
+              <button class="btn btn-primary w-100" onclick="calcSubtract()">-</button>
             </div>
             <div class="col">
-              <button class="btn btn-primary w-100">x</button>
+              <button class="btn btn-primary w-100" onclick="calcMultiply()">x</button>
             </div>
             <div class="col">
-              <button class="btn btn-primary w-100">&div;</button>
+              <button class="btn btn-primary w-100" onclick="calcDivide()">&div;</button>
             </div>
             <div class="col">
-              <button class="btn btn-primary w-100" onclick="clearScreen()">C</button>
+              <button class="btn btn-primary w-100" onclick="clearAll()">C</button>
             </div>
           </div>
           <div class="row row-cols-3 pt-2 g-2">
@@ -249,7 +249,7 @@
               <button class="btn btn-primary w-100" onclick="numberInput()">0</button>
             </div>
             <div class="col-4">
-              <button class="btn btn-primary w-100">=</button>
+              <button class="btn btn-primary w-100" onclick="calcEquals()">=</button>
             </div>
           </div>
         </div>
