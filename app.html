@@ -166,12 +166,124 @@
           <button class="btn btn-outline-danger" onclick="average()">
             Average
           </button>
-          <button class="btn btn-outline-danger" onclick="numberInput()">
-            7
-          </button>
         </div>
       </div>
     </main>
+
+    <!-- Calculator -->
+    <div class="container border border-1 rounded-3 mb-3">
+      <div class="row">
+        <div class="col-12 px-4">
+          <div class="row border border-1 rounded-2 mt-2">
+            <div class="col-10 text-start" id="resultsArea">0</div>
+            <div class="col-2 text-end" id="operatorArea"></div>
+          </div>
+        </div>
+        <div class="col-8 pb-2">
+          <div class="row row-cols-5 pt-2 g-2">
+            <div class="col">
+              <button class="btn btn-primary w-100">+</button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100">-</button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100">x</button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100">&div;</button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="clearScreen()">C</button>
+            </div>
+          </div>
+          <div class="row row-cols-3 pt-2 g-2">
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                7
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                8
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                9
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                4
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                5
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                6
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                1
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                2
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="numberInput()">
+                3
+              </button>
+            </div>
+          </div>
+          <div class="row pt-2 g-2">
+            <div class="col-8">
+              <button class="btn btn-primary w-100" onclick="numberInput()">0</button>
+            </div>
+            <div class="col-4">
+              <button class="btn btn-primary w-100">=</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 py-2">
+          <div class="row row-cols-1 gy-2">
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="calcSumAll()">
+                Sum All
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="calcMultiplyAll()">
+                Mult All
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="calcMinimum()">
+                Min
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="calcMaximum()">
+                Max
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100" onclick="calcAverage()">
+                Avg
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- TODO: fix footer stuff -->
     <footer>

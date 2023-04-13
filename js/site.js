@@ -101,7 +101,7 @@ function divide(num1, num2) {
 
 function sumAll() {
   let numberString = document.getElementById("numberSeries").value;
-  let numbers = parseInt(numberString);
+  let numbers = parseFloat(numberString);
 
   if (isNaN(numbers)) {
     Swal.fire({
@@ -117,7 +117,7 @@ function sumAll() {
     let numberSum = 0;
 
     for (i = 0; i < numberArray.length; i++) {
-      let currentNumber = parseInt(numberArray[i]);
+      let currentNumber = parseFloat(numberArray[i]);
       numberSum += currentNumber;
     }
 
@@ -128,7 +128,7 @@ function sumAll() {
 
 function multiplyAll() {
   let numberString = document.getElementById("numberSeries").value;
-  let numbers = parseInt(numberString);
+  let numbers = parseFloat(numberString);
 
   if (isNaN(numbers)) {
     Swal.fire({
@@ -144,7 +144,7 @@ function multiplyAll() {
     let numberProduct = 1;
 
     for (i = 0; i < numberArray.length; i++) {
-      let currentNumber = parseInt(numberArray[i]);
+      let currentNumber = parseFloat(numberArray[i]);
       numberProduct *= currentNumber;
     }
 
@@ -155,7 +155,7 @@ function multiplyAll() {
 
 function minimum() {
   let numberString = document.getElementById("numberSeries").value;
-  let numbers = parseInt(numberString);
+  let numbers = parseFloat(numberString);
 
   if (isNaN(numbers)) {
     Swal.fire({
@@ -170,10 +170,9 @@ function minimum() {
 
     let minimum = parseInt(numberArray[0]);
 
-    for (i = 0; i < numberArray.length; i++) {
+    for (i = 1; i < numberArray.length; i++) {
       let currentNumber = parseInt(numberArray[i]);
-      if (currentNumber < minimum)
-      {
+      if (currentNumber < minimum) {
         minimum = currentNumber;
       }
     }
@@ -200,7 +199,7 @@ function maximum() {
 
     let maximum = parseInt(numberArray[0]);
 
-    for (i = 0; i < numberArray.length; i++) {
+    for (i = 1; i < numberArray.length; i++) {
       let currentNumber = parseInt(numberArray[i]);
       if (currentNumber > maximum) {
         maximum = currentNumber;
@@ -235,19 +234,239 @@ function average() {
     }
 
     results = document.getElementById("results");
-    results.innerText = (numberSum/numberArray.length);
+    results.innerText = numberSum / numberArray.length;
   }
 }
 
+
 function numberInput()
 {
-  let input = document.getElementById('numberSeries');
-  if (input.value == '')
+  let input = document.activeElement;
+  let results = document.getElementById("resultsArea");
+
+  if (results.innerText == '0')
   {
-    input.value = 7
+    results.innerText = input.innerText
   }
+
   else
   {
-    input.value += 7;
+    results.innerText += input.innerText
+  }
+}
+
+function numberInputTest() {
+  let input = document.activeElement;
+  let results = document.getElementById("resultsArea");
+  let operator = document.getElementById('operatorArea');
+  let previousInput = '0';
+
+
+  if (results.innerText == '0' && operator.innerText == '')
+  {
+    results.innerText = input.innerText;
+  }
+
+  else
+  {
+    if (result.innerText !='0' && operator.innerText != '')
+    {
+      previousInput = results.innerText;
+      clearScreen();
+      results.innerText = input.innerText;
+    }
+
+    else if (results.innerText != '0' && operator.innerText == '')
+    {
+      results.innerText += input.innerText;
+    }
+  }
+}
+
+function calcSumAll() {
+  let numberString = document.getElementById("resultsArea").innerText;
+  let numbers = parseFloat(numberString);
+
+  if (isNaN(numbers)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } else {
+    let numberArray = numberString.split("");
+
+    let numberSum = 0;
+
+    for (i = 0; i < numberArray.length; i++) {
+      let currentNumber = parseFloat(numberArray[i]);
+      numberSum += currentNumber;
+    }
+
+    let operator = document.getElementById("operatorArea");
+    operator.innerText = '+';
+    
+    results = document.getElementById("resultsArea");
+    results.innerText = numberSum;
+  }
+}
+
+function calcMultiplyAll() {
+  let numberString = document.getElementById("resultsArea").innerText;
+  let numbers = parseFloat(numberString);
+
+  if (isNaN(numbers)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } else {
+    let numberArray = numberString.split("");
+
+    let numberProduct = 1;
+
+    for (i = 0; i < numberArray.length; i++) {
+      let currentNumber = parseFloat(numberArray[i]);
+      numberProduct *= currentNumber;
+    }
+
+    let operator = document.getElementById("operatorArea");
+    operator.innerText = "x";
+
+    results = document.getElementById("resultsArea");
+    results.innerText = numberProduct;
+  }
+}
+
+function calcMinimum() {
+  let numberString = document.getElementById("resultsArea").innerText;
+  let numbers = parseFloat(numberString);
+
+  if (isNaN(numbers)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } else {
+    let numberArray = numberString.split("");
+
+    let minimum = parseFloat(numberArray[0]);
+
+    for (i = 0; i < numberArray.length; i++) {
+      let currentNumber = parseFloat(numberArray[i]);
+      if (currentNumber < minimum) {
+        minimum = currentNumber;
+      }
+    }
+
+    results = document.getElementById("resultsArea");
+    results.innerText = minimum;
+  }
+
+    let operator = document.getElementById("operatorArea");
+    operator.innerText = "MIN";
+}
+
+function calcMaximum() {
+  let numberString = document.getElementById("resultsArea").innerText;
+  let numbers = parseFloat(numberString);
+
+  if (isNaN(numbers)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } else {
+    let numberArray = numberString.split("");
+
+    let maximum = parseFloat(numberArray[0]);
+
+    for (i = 0; i < numberArray.length; i++) {
+      let currentNumber = parseFloat(numberArray[i]);
+      if (currentNumber > maximum) {
+        maximum = currentNumber;
+      }
+    }
+
+    results = document.getElementById("resultsArea");
+    results.innerText = maximum;
+  }
+
+    let operator = document.getElementById("operatorArea");
+    operator.innerText = "MAX";
+}
+
+function calcAverage() {
+  let numberString = document.getElementById("resultsArea").innerText;
+  let numbers = parseFloat(numberString);
+
+  if (isNaN(numbers)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } else {
+    let numberArray = numberString.split("");
+
+    let numberSum = 0;
+
+    for (i = 0; i < numberArray.length; i++) {
+      let currentNumber = parseFloat(numberArray[i]);
+      numberSum += currentNumber;
+    }
+
+    results = document.getElementById("resultsArea");
+    results.innerText = numberSum / numberArray.length;
+  }
+
+    let operator = document.getElementById("operatorArea");
+    operator.innerText = "AVG";
+}
+
+function clearScreen() {
+  let results = document.getElementById("resultsArea");
+  let operator = document.getElementById("operatorArea");
+  results.innerText = "0";
+  operator.innerText = '';
+}
+
+function calcAdd(previousNumber) {
+  
+  let results = document.getElementById('resultsArea');
+  let operator = document.getElementById('operatorArea');
+  operator.innerText = '+';
+
+  let value1 = parseInt(previousNumber);
+  let value2 = parseInt(results.innerText);
+
+  if (isNaN(value1) || isNaN(value2)) {
+    Swal.fire({
+      icon: "error",
+      heightAuto: false,
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+      backdrop: "false",
+    });
+  } 
+  
+  
+  else {
+    let value3 = value1 + value2;
+
+    results.innerText = value3;
   }
 }
